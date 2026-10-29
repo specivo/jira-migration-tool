@@ -36,6 +36,16 @@ class TestRestrictedIssues:
         _, bundle = await run_export()
         assert bundle.by_ref("issues")["10001"]["is_private"] is True
 
+    async def test_worklog_comments_of_a_restricted_issue_are_left_out(self, cloud, run_export):
+        response = _issue_response(cloud, "10001")
+        response["json"]["fields"]["security"] = {"id": "10100", "name": "Staff only"}
+        cloud.override("GET", "/rest/api/3/issue/10001", response)
+        _, bundle = await run_export()
+        entries = bundle.by_ref("time_entries")
+        assert entries["10600"]["hours"] == "1.50"
+        assert "comments" not in entries["10600"]
+        assert bundle.not_carried()["Comments of worklogs on restricted issues"] == 1
+
     async def test_an_unrestricted_issue_is_not_private(self, cloud, run_export):
         response = _issue_response(cloud, "10001")
         response["json"]["fields"]["security"] = None

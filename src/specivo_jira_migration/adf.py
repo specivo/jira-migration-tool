@@ -64,6 +64,9 @@ type Node = Mapping[str, Any]
 UNKNOWN_NODE = "Rich text elements of a kind this tool does not convert ({}): their text is kept"
 UNKNOWN_MARK = "Text formatting of a kind this tool does not convert ({}): the text is kept unformatted"
 MERGED_CELLS = "Merged table cells (written as separate cells, the text in the first)"
+# Spans are unmerged into empty cells; these bound how far a table can grow that way.
+MAX_TABLE_COLUMNS = 1000
+MAX_TABLE_CELLS = 100_000
 NESTED_TABLES = "Tables inside table cells (written after the table that held them)"
 
 PANEL_LABELS = {
@@ -496,6 +499,9 @@ class _Renderer:
                     c += 1
                 colspan = _span(_attrs(cell).get("colspan"))
                 rowspan = min(_span(_attrs(cell).get("rowspan")), len(rows) - r)
+                colspan = min(colspan, max(1, MAX_TABLE_COLUMNS - c))
+                if len(grid) + colspan * rowspan > MAX_TABLE_CELLS:
+                    colspan = rowspan = 1
                 if colspan > 1 or rowspan > 1:
                     self.ctx.notes[MERGED_CELLS] += 1
                 text = self._cell(cell, result, (r + 1, c + 1))

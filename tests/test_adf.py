@@ -430,6 +430,13 @@ class TestTables:
         )
         assert ctx.notes == {adf.MERGED_CELLS: 2}
 
+    def test_spans_cannot_grow_a_table_without_bound(self, ctx):
+        wide = b.table(b.row(*(cell(str(i), colspan=1000) for i in range(50))))
+        header = md(ctx, wide).split("\n")[0]
+        assert header.count("|") - 1 <= adf.MAX_TABLE_COLUMNS + 50
+        tall = b.table(b.row(cell("x", colspan=1000, rowspan=200)), *(b.row("y") for _ in range(199)))
+        assert md(ctx, tall).split("\n")[0] == "|  |"
+
     def test_lists_and_code_in_a_cell_fold_into_one_line(self, ctx):
         table = b.table(
             b.row(b.th("Notes")),

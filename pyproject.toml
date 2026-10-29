@@ -1,6 +1,6 @@
 [project]
 name = "specivo-jira-migration"
-version = "0.1.0"
+version = "0.1.1"
 description = "Export Jira Cloud or Jira Data Center projects to a Specivo import bundle"
 readme = "README.md"
 license = "Apache-2.0"

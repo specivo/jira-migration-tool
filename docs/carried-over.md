@@ -132,6 +132,8 @@ and times, under one activity, **Development**, since Jira's worklogs have none.
 - A worklog restricted to a group or role keeps its time, but not its comment: Specivo shows a time
   entry to everyone who may see the project's time. The restriction is kept in `extra`, and the comments
   left out are counted in the report.
+- A worklog on a restricted issue keeps its time but not its comment either: Specivo imports the issue as
+  private, but shows its time entries to everyone who may see the project's time.
 
 ## Components and versions
 

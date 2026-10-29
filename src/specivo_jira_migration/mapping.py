@@ -57,7 +57,8 @@ seconds in ``extra`` when that rounded them. A comment is plain text in
 Specivo, so ADF is flattened to text, a line per paragraph. The comment of a
 worklog restricted to a group or role is left out and counted, as Specivo shows
 a time entry to everyone who may see the project's time; the restriction is
-kept in ``extra.jira_visibility``.
+kept in ``extra.jira_visibility``. So is the comment of any
+worklog on a restricted issue, which Specivo imports as private.
 
 Components and versions: each project's components become its categories and
 its versions its versions (released: closed; archived: locked, as nothing new
@@ -1577,6 +1578,8 @@ class _Mapper:
 
     def _time_entries(self, project_key: str, issue_ref: str, item: JSON) -> None:
         entries: list[tuple[datetime, int, TimeEntry]] = []
+        # Specivo shows time entries to everyone who may see the project's time, even on a private issue.
+        restricted_issue = bool(_restriction(item["issue"].get("fields", {})))
         for worklog in item.get("worklogs") or []:
             seconds = worklog.get("timeSpentSeconds")
             started = _time(worklog.get("started"))
@@ -1600,6 +1603,10 @@ class _Mapper:
                 extra["jira_visibility"] = {"type": visibility.get("type"), "value": visibility.get("value")}
                 if comment:
                     self.not_carried["Comments of worklogs restricted to a group or role"] += 1
+                comment = None
+            elif restricted_issue:
+                if comment:
+                    self.not_carried["Comments of worklogs on restricted issues"] += 1
                 comment = None
             entries.append(
                 (
