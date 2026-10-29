@@ -1,0 +1,1498 @@
+{
+ "_note": "HAND-WRITTEN fixture, not recorded. Shapes follow Atlassian's public REST API reference (Jira Cloud platform REST API v2/v3 and Jira Data Center REST API v2). All people, emails, account ids, names and URLs are invented (example.com / example.atlassian.net).",
+ "site": "https://jira.example.com",
+ "interactions": [
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/serverInfo"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "baseUrl": "https://jira.example.com",
+      "version": "9.12.4",
+      "versionNumbers": [
+       9,
+       12,
+       4
+      ],
+      "deploymentType": "Server",
+      "buildNumber": 9120004,
+      "buildDate": "2024-01-15T00:00:00.000+0000",
+      "serverTime": "2026-10-28T16:00:00.000+0700",
+      "scmInfo": "0000000000000000000000000000000000000000",
+      "serverTitle": "Example Jira"
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/field"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "id": "summary",
+       "name": "Summary",
+       "custom": false,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "summary"
+       ],
+       "schema": {
+        "type": "string",
+        "system": "summary"
+       }
+      },
+      {
+       "id": "customfield_10100",
+       "name": "Epic Link",
+       "custom": true,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "cf[10100]",
+        "Epic Link"
+       ],
+       "schema": {
+        "type": "any",
+        "custom": "com.pyxis.greenhopper.jira:gh-epic-link",
+        "customId": 10100
+       }
+      },
+      {
+       "id": "customfield_10101",
+       "name": "Sprint",
+       "custom": true,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "cf[10101]",
+        "Sprint"
+       ],
+       "schema": {
+        "type": "array",
+        "items": "string",
+        "custom": "com.pyxis.greenhopper.jira:gh-sprint",
+        "customId": 10101
+       }
+      },
+      {
+       "id": "customfield_10200",
+       "name": "Severity",
+       "custom": true,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "cf[10200]",
+        "Severity"
+       ],
+       "schema": {
+        "type": "option",
+        "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+        "customId": 10200
+       }
+      },
+      {
+       "id": "customfield_10201",
+       "name": "Reviewer",
+       "custom": true,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "cf[10201]",
+        "Reviewer"
+       ],
+       "schema": {
+        "type": "user",
+        "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+        "customId": 10201
+       }
+      },
+      {
+       "id": "customfield_10202",
+       "name": "Release notes",
+       "custom": true,
+       "orderable": true,
+       "navigable": true,
+       "searchable": true,
+       "clauseNames": [
+        "cf[10202]",
+        "Release notes"
+       ],
+       "schema": {
+        "type": "string",
+        "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+        "customId": 10202
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/status"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "self": "https://jira.example.com/rest/api/2/status/1",
+       "description": "",
+       "iconUrl": "https://jira.example.com/images/icons/statuses/open.png",
+       "name": "Open",
+       "id": "1",
+       "statusCategory": {
+        "self": "https://jira.example.com/rest/api/2/statuscategory/2",
+        "id": 2,
+        "key": "new",
+        "colorName": "default",
+        "name": "To Do"
+       }
+      },
+      {
+       "self": "https://jira.example.com/rest/api/2/status/3",
+       "description": "",
+       "iconUrl": "https://jira.example.com/images/icons/statuses/inprogress.png",
+       "name": "In Progress",
+       "id": "3",
+       "statusCategory": {
+        "self": "https://jira.example.com/rest/api/2/statuscategory/4",
+        "id": 4,
+        "key": "indeterminate",
+        "colorName": "inprogress",
+        "name": "In Progress"
+       }
+      },
+      {
+       "self": "https://jira.example.com/rest/api/2/status/5",
+       "description": "",
+       "iconUrl": "https://jira.example.com/images/icons/statuses/resolved.png",
+       "name": "Resolved",
+       "id": "5",
+       "statusCategory": {
+        "self": "https://jira.example.com/rest/api/2/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "success",
+        "name": "Done"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/priority"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "self": "https://jira.example.com/rest/api/2/priority/1",
+       "statusColor": "#d04437",
+       "description": "This problem will block progress.",
+       "iconUrl": "https://jira.example.com/images/icons/priorities/highest.svg",
+       "name": "Highest",
+       "id": "1"
+      },
+      {
+       "self": "https://jira.example.com/rest/api/2/priority/3",
+       "statusColor": "#f79232",
+       "description": "Has the potential to affect progress.",
+       "iconUrl": "https://jira.example.com/images/icons/priorities/medium.svg",
+       "name": "Medium",
+       "id": "3"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issuetype"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "self": "https://jira.example.com/rest/api/2/issuetype/1",
+       "id": "1",
+       "description": "A problem which impairs or prevents the functions of the product.",
+       "iconUrl": "https://jira.example.com/images/icons/issuetypes/bug.svg",
+       "name": "Bug",
+       "subtask": false,
+       "avatarId": 10303
+      },
+      {
+       "self": "https://jira.example.com/rest/api/2/issuetype/3",
+       "id": "3",
+       "description": "A task that needs to be done.",
+       "iconUrl": "https://jira.example.com/images/icons/issuetypes/task.svg",
+       "name": "Task",
+       "subtask": false,
+       "avatarId": 10318
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/myself"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "self": "https://jira.example.com/rest/api/2/user?username=admin",
+      "active": true,
+      "timeZone": "Asia/Bangkok",
+      "locale": "en_US"
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/project/SUP"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "self": "https://jira.example.com/rest/api/2/project/10200",
+      "id": "10200",
+      "key": "SUP",
+      "name": "Customer Support",
+      "projectTypeKey": "software",
+      "avatarUrls": {
+       "48x48": "https://jira.example.com/secure/projectavatar?avatarId=10324"
+      },
+      "expand": "description,lead,url,projectKeys",
+      "description": "Internal help desk.",
+      "lead": {
+       "self": "https://jira.example.com/rest/api/2/user?username=alice",
+       "name": "alice",
+       "key": "JIRAUSER10100",
+       "emailAddress": "alice@example.com",
+       "avatarUrls": {
+        "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+       },
+       "displayName": "Alice Example",
+       "active": true,
+       "timeZone": "Asia/Bangkok"
+      },
+      "components": [],
+      "issueTypes": [
+       {
+        "self": "https://jira.example.com/rest/api/2/issuetype/1",
+        "id": "1",
+        "description": "A problem which impairs or prevents the functions of the product.",
+        "iconUrl": "https://jira.example.com/images/icons/issuetypes/bug.svg",
+        "name": "Bug",
+        "subtask": false,
+        "avatarId": 10303
+       },
+       {
+        "self": "https://jira.example.com/rest/api/2/issuetype/3",
+        "id": "3",
+        "description": "A task that needs to be done.",
+        "iconUrl": "https://jira.example.com/images/icons/issuetypes/task.svg",
+        "name": "Task",
+        "subtask": false,
+        "avatarId": 10318
+       }
+      ],
+      "assigneeType": "PROJECT_LEAD",
+      "versions": [],
+      "roles": {}
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/project/SUP/components"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "self": "https://jira.example.com/rest/api/2/component/30200",
+       "id": "30200",
+       "name": "Proxy",
+       "description": "The reverse proxy.",
+       "lead": {
+        "self": "https://jira.example.com/rest/api/2/user?username=alice",
+        "name": "alice",
+        "key": "JIRAUSER10100",
+        "emailAddress": "alice@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Alice Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "assigneeType": "COMPONENT_LEAD",
+       "project": "SUP",
+       "projectId": 10200
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/project/SUP/versions"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": [
+      {
+       "self": "https://jira.example.com/rest/api/2/version/30300",
+       "id": "30300",
+       "name": "3.2",
+       "archived": false,
+       "released": true,
+       "releaseDate": "2024-02-28",
+       "userReleaseDate": "28/Feb/24",
+       "projectId": 10200
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/search",
+    "params": {
+     "jql": "project = \"SUP\" ORDER BY key ASC",
+     "startAt": "0"
+    }
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "schema,names",
+      "startAt": 0,
+      "maxResults": 2,
+      "total": 3,
+      "issues": [
+       {
+        "expand": "",
+        "id": "20001",
+        "self": "https://jira.example.com/rest/api/2/issue/20001",
+        "key": "SUP-1"
+       },
+       {
+        "expand": "",
+        "id": "20002",
+        "self": "https://jira.example.com/rest/api/2/issue/20002",
+        "key": "SUP-2"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/search",
+    "params": {
+     "jql": "project = \"SUP\" ORDER BY key ASC",
+     "startAt": "2"
+    }
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "schema,names",
+      "startAt": 2,
+      "maxResults": 2,
+      "total": 3,
+      "issues": [
+       {
+        "expand": "",
+        "id": "20003",
+        "self": "https://jira.example.com/rest/api/2/issue/20003",
+        "key": "SUP-3"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20001"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "20001",
+      "self": "https://jira.example.com/rest/api/2/issue/20001",
+      "key": "SUP-1",
+      "changelog": {
+       "startAt": 0,
+       "maxResults": 2,
+       "total": 2,
+       "histories": [
+        {
+         "id": "40001",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=alice",
+          "name": "alice",
+          "key": "JIRAUSER10100",
+          "emailAddress": "alice@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Alice Example",
+          "active": true,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2023-11-01T09:30:00.000+0700",
+         "items": [
+          {
+           "field": "assignee",
+           "fieldtype": "jira",
+           "from": "alice",
+           "fromString": "Alice Example",
+           "to": "bob",
+           "toString": "Bob Example"
+          },
+          {
+           "field": "status",
+           "fieldtype": "jira",
+           "from": "1",
+           "fromString": "Open",
+           "to": "3",
+           "toString": "In Progress"
+          },
+          {
+           "field": "Sprint",
+           "fieldtype": "custom",
+           "from": "11",
+           "fromString": "SUP Sprint 1, the first",
+           "to": "11, 12",
+           "toString": "SUP Sprint 1, the first, SUP Sprint 2"
+          },
+          {
+           "field": "Reviewer",
+           "fieldtype": "custom",
+           "from": "alice",
+           "fromString": "Alice Example",
+           "to": "bob",
+           "toString": "Bob Example"
+          },
+          {
+           "field": "Severity",
+           "fieldtype": "custom",
+           "from": "10300",
+           "fromString": "Low",
+           "to": "10301",
+           "toString": "High"
+          }
+         ]
+        },
+        {
+         "id": "40002",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=bob",
+          "name": "bob",
+          "key": "bob",
+          "emailAddress": "bob@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Bob Example",
+          "active": true,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2023-11-03T17:00:00.000+0700",
+         "items": [
+          {
+           "field": "status",
+           "fieldtype": "jira",
+           "from": "3",
+           "fromString": "In Progress",
+           "to": "5",
+           "toString": "Resolved"
+          },
+          {
+           "field": "resolution",
+           "fieldtype": "jira",
+           "from": null,
+           "fromString": null,
+           "to": "1",
+           "toString": "Fixed"
+          },
+          {
+           "field": "Epic Child",
+           "fieldtype": "custom",
+           "from": null,
+           "fromString": null,
+           "to": "20003",
+           "toString": "SUP-3"
+          }
+         ]
+        }
+       ]
+      },
+      "fields": {
+       "issuetype": {
+        "self": "https://jira.example.com/rest/api/2/issuetype/1",
+        "id": "1",
+        "description": "A problem which impairs or prevents the functions of the product.",
+        "iconUrl": "https://jira.example.com/images/icons/issuetypes/bug.svg",
+        "name": "Bug",
+        "subtask": false,
+        "avatarId": 10303
+       },
+       "project": {
+        "self": "https://jira.example.com/rest/api/2/project/10200",
+        "id": "10200",
+        "key": "SUP",
+        "name": "Customer Support",
+        "projectTypeKey": "software",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/projectavatar?avatarId=10324"
+        }
+       },
+       "fixVersions": [
+        {
+         "self": "https://jira.example.com/rest/api/2/version/30300",
+         "id": "30300",
+         "name": "3.2",
+         "archived": false,
+         "released": true,
+         "releaseDate": "2024-02-28"
+        }
+       ],
+       "resolution": {
+        "self": "https://jira.example.com/rest/api/2/resolution/1",
+        "id": "1",
+        "description": "A fix for this issue is checked in.",
+        "name": "Fixed"
+       },
+       "resolutiondate": "2023-11-03T17:00:00.000+0700",
+       "workratio": -1,
+       "lastViewed": null,
+       "watches": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/watchers",
+        "watchCount": 1,
+        "isWatching": false
+       },
+       "created": "2023-11-01T09:00:00.000+0700",
+       "priority": {
+        "self": "https://jira.example.com/rest/api/2/priority/1",
+        "statusColor": "#d04437",
+        "description": "This problem will block progress.",
+        "iconUrl": "https://jira.example.com/images/icons/priorities/highest.svg",
+        "name": "Highest",
+        "id": "1"
+       },
+       "labels": [
+        "support"
+       ],
+       "versions": [],
+       "issuelinks": [
+        {
+         "id": "30100",
+         "self": "https://jira.example.com/rest/api/2/issueLink/30100",
+         "type": {
+          "id": "10000",
+          "name": "Blocks",
+          "inward": "is blocked by",
+          "outward": "blocks",
+          "self": "https://jira.example.com/rest/api/2/issueLinkType/10000"
+         },
+         "outwardIssue": {
+          "id": "20002",
+          "key": "SUP-2",
+          "self": "https://jira.example.com/rest/api/2/issue/20002",
+          "fields": {
+           "summary": "Replace the toner in room 4"
+          }
+         }
+        }
+       ],
+       "assignee": {
+        "self": "https://jira.example.com/rest/api/2/user?username=bob",
+        "name": "bob",
+        "key": "bob",
+        "emailAddress": "bob@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Bob Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "updated": "2023-11-03T17:00:00.000+0700",
+       "status": {
+        "self": "https://jira.example.com/rest/api/2/status/5",
+        "description": "",
+        "iconUrl": "https://jira.example.com/images/icons/statuses/resolved.png",
+        "name": "Resolved",
+        "id": "5",
+        "statusCategory": {
+         "self": "https://jira.example.com/rest/api/2/statuscategory/3",
+         "id": 3,
+         "key": "done",
+         "colorName": "success",
+         "name": "Done"
+        }
+       },
+       "components": [
+        {
+         "self": "https://jira.example.com/rest/api/2/component/30200",
+         "id": "30200",
+         "name": "Proxy"
+        }
+       ],
+       "description": "h3. Symptoms\n\n* Jobs stay queued\n* No error shown\n\n[~bob] is looking at it; related to SUP-2.",
+       "timetracking": {},
+       "attachment": [],
+       "summary": "Printer queue stalls",
+       "creator": {
+        "self": "https://jira.example.com/rest/api/2/user?username=alice",
+        "name": "alice",
+        "key": "JIRAUSER10100",
+        "emailAddress": "alice@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Alice Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "subtasks": [],
+       "reporter": {
+        "self": "https://jira.example.com/rest/api/2/user?username=alice",
+        "name": "alice",
+        "key": "JIRAUSER10100",
+        "emailAddress": "alice@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Alice Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+       },
+       "environment": null,
+       "duedate": null,
+       "progress": {
+        "progress": 0,
+        "total": 0
+       },
+       "votes": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/votes",
+        "votes": 1,
+        "hasVoted": false
+       },
+       "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 1,
+        "worklogs": [
+         {
+          "self": "https://jira.example.com/rest/api/2/issue/20001/worklog/40100",
+          "author": {
+           "self": "https://jira.example.com/rest/api/2/user?username=alice",
+           "name": "alice",
+           "key": "JIRAUSER10100",
+           "emailAddress": "alice@example.com",
+           "avatarUrls": {
+            "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+           },
+           "displayName": "Alice Example",
+           "active": true,
+           "timeZone": "Asia/Bangkok"
+          },
+          "updateAuthor": {
+           "self": "https://jira.example.com/rest/api/2/user?username=alice",
+           "name": "alice",
+           "key": "JIRAUSER10100",
+           "emailAddress": "alice@example.com",
+           "avatarUrls": {
+            "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+           },
+           "displayName": "Alice Example",
+           "active": true,
+           "timeZone": "Asia/Bangkok"
+          },
+          "comment": "Read the *proxy* logs.",
+          "created": "2024-03-04T20:05:00.000+0000",
+          "updated": "2024-03-04T20:05:00.000+0000",
+          "started": "2024-03-04T20:00:00.000+0000",
+          "timeSpent": "45m",
+          "timeSpentSeconds": 2700,
+          "id": "40100",
+          "issueId": "20001"
+         }
+        ]
+       },
+       "comment": {
+        "comments": [
+         {
+          "self": "https://jira.example.com/rest/api/2/issue/20001/comment/30001",
+          "id": "30001",
+          "author": {
+           "self": "https://jira.example.com/rest/api/2/user?username=bob",
+           "name": "bob",
+           "key": "bob",
+           "emailAddress": "bob@example.com",
+           "avatarUrls": {
+            "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+           },
+           "displayName": "Bob Example",
+           "active": true,
+           "timeZone": "Asia/Bangkok"
+          },
+          "body": "Restarting the spooler helps for a while, [~alice].",
+          "updateAuthor": {
+           "self": "https://jira.example.com/rest/api/2/user?username=bob",
+           "name": "bob",
+           "key": "bob",
+           "emailAddress": "bob@example.com",
+           "avatarUrls": {
+            "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+           },
+           "displayName": "Bob Example",
+           "active": true,
+           "timeZone": "Asia/Bangkok"
+          },
+          "created": "2023-11-01T10:00:00.000+0700",
+          "updated": "2023-11-01T10:00:00.000+0700"
+         }
+        ],
+        "maxResults": 1,
+        "total": 1,
+        "startAt": 0
+       },
+       "customfield_10101": [
+        "com.atlassian.greenhopper.service.sprint.Sprint@b5b2c[id=11,rapidViewId=10,state=CLOSED,name=SUP Sprint 1, the first,goal=,startDate=2024-01-29T10:00:00.000+07:00,endDate=2024-02-12T10:00:00.000+07:00,completeDate=2024-02-12T11:00:00.000+07:00,activatedDate=2024-01-29T10:00:00.000+07:00,sequence=11,synced=false,autoStartStop=false,incompleteIssuesDestinationId=<null>]",
+        "com.atlassian.greenhopper.service.sprint.Sprint@c5b2c[id=12,rapidViewId=10,state=ACTIVE,name=SUP Sprint 2,goal=,startDate=2024-02-12T10:00:00.000+07:00,endDate=2024-02-26T10:00:00.000+07:00,completeDate=<null>,activatedDate=2024-02-12T10:00:00.000+07:00,sequence=12,synced=false,autoStartStop=false,incompleteIssuesDestinationId=<null>]"
+       ],
+       "customfield_10200": {
+        "self": "https://jira.example.com/rest/api/2/customFieldOption/10301",
+        "value": "High",
+        "id": "10301",
+        "disabled": false
+       },
+       "customfield_10201": {
+        "self": "https://jira.example.com/rest/api/2/user?username=bob",
+        "name": "bob",
+        "key": "bob",
+        "emailAddress": "bob@example.com",
+        "displayName": "Bob Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "customfield_10202": "Fixed the *login* page for [~alice]."
+      }
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20002"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "20002",
+      "self": "https://jira.example.com/rest/api/2/issue/20002",
+      "key": "SUP-2",
+      "changelog": {
+       "startAt": 0,
+       "maxResults": 2,
+       "total": 3,
+       "histories": [
+        {
+         "id": "40003",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=carol",
+          "name": "carol",
+          "key": "JIRAUSER10102",
+          "emailAddress": "carol@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Carol Example",
+          "active": false,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2023-11-02T09:00:00.000+0700",
+         "items": [
+          {
+           "field": "status",
+           "fieldtype": "jira",
+           "from": "1",
+           "fromString": "Open",
+           "to": "3",
+           "toString": "In Progress"
+          }
+         ]
+        },
+        {
+         "id": "40004",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=carol",
+          "name": "carol",
+          "key": "JIRAUSER10102",
+          "emailAddress": "carol@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Carol Example",
+          "active": false,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2023-11-02T12:00:00.000+0700",
+         "items": [
+          {
+           "field": "assignee",
+           "fieldtype": "jira",
+           "from": null,
+           "fromString": null,
+           "to": "alice",
+           "toString": "Alice Example"
+          },
+          {
+           "field": "Epic Link",
+           "fieldtype": "custom",
+           "from": "20001",
+           "fromString": "SUP-1",
+           "to": "20903",
+           "toString": "PLAT-3"
+          }
+         ]
+        }
+       ]
+      },
+      "fields": {
+       "issuetype": {
+        "self": "https://jira.example.com/rest/api/2/issuetype/3",
+        "id": "3",
+        "description": "A task that needs to be done.",
+        "iconUrl": "https://jira.example.com/images/icons/issuetypes/task.svg",
+        "name": "Task",
+        "subtask": false,
+        "avatarId": 10318
+       },
+       "project": {
+        "self": "https://jira.example.com/rest/api/2/project/10200",
+        "id": "10200",
+        "key": "SUP",
+        "name": "Customer Support",
+        "projectTypeKey": "software",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/projectavatar?avatarId=10324"
+        }
+       },
+       "fixVersions": [],
+       "resolution": null,
+       "resolutiondate": null,
+       "workratio": -1,
+       "lastViewed": null,
+       "watches": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/watchers",
+        "watchCount": 1,
+        "isWatching": false
+       },
+       "created": "2023-11-02T08:00:00.000+0700",
+       "priority": {
+        "self": "https://jira.example.com/rest/api/2/priority/3",
+        "statusColor": "#f79232",
+        "description": "Has the potential to affect progress.",
+        "iconUrl": "https://jira.example.com/images/icons/priorities/medium.svg",
+        "name": "Medium",
+        "id": "3"
+       },
+       "labels": [],
+       "versions": [],
+       "issuelinks": [
+        {
+         "id": "30100",
+         "self": "https://jira.example.com/rest/api/2/issueLink/30100",
+         "type": {
+          "id": "10000",
+          "name": "Blocks",
+          "inward": "is blocked by",
+          "outward": "blocks",
+          "self": "https://jira.example.com/rest/api/2/issueLinkType/10000"
+         },
+         "inwardIssue": {
+          "id": "20001",
+          "key": "SUP-1",
+          "self": "https://jira.example.com/rest/api/2/issue/20001",
+          "fields": {
+           "summary": "Printer queue stalls"
+          }
+         }
+        }
+       ],
+       "assignee": {
+        "self": "https://jira.example.com/rest/api/2/user?username=alice",
+        "name": "alice",
+        "key": "JIRAUSER10100",
+        "emailAddress": "alice@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Alice Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "updated": "2023-11-02T12:00:00.000+0700",
+       "status": {
+        "self": "https://jira.example.com/rest/api/2/status/3",
+        "description": "",
+        "iconUrl": "https://jira.example.com/images/icons/statuses/inprogress.png",
+        "name": "In Progress",
+        "id": "3",
+        "statusCategory": {
+         "self": "https://jira.example.com/rest/api/2/statuscategory/4",
+         "id": 4,
+         "key": "indeterminate",
+         "colorName": "inprogress",
+         "name": "In Progress"
+        }
+       },
+       "components": [],
+       "description": null,
+       "timetracking": {},
+       "attachment": [],
+       "summary": "Replace the toner in room 4",
+       "creator": {
+        "self": "https://jira.example.com/rest/api/2/user?username=carol",
+        "name": "carol",
+        "key": "JIRAUSER10102",
+        "emailAddress": "carol@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Carol Example",
+        "active": false,
+        "timeZone": "Asia/Bangkok"
+       },
+       "subtasks": [],
+       "reporter": {
+        "self": "https://jira.example.com/rest/api/2/user?username=carol",
+        "name": "carol",
+        "key": "JIRAUSER10102",
+        "emailAddress": "carol@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Carol Example",
+        "active": false,
+        "timeZone": "Asia/Bangkok"
+       },
+       "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+       },
+       "environment": null,
+       "duedate": null,
+       "progress": {
+        "progress": 0,
+        "total": 0
+       },
+       "votes": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/votes",
+        "votes": 1,
+        "hasVoted": false
+       },
+       "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+       },
+       "comment": {
+        "comments": [],
+        "maxResults": 0,
+        "total": 0,
+        "startAt": 0
+       },
+       "customfield_10100": "PLAT-3"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20003"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+      "id": "20003",
+      "self": "https://jira.example.com/rest/api/2/issue/20003",
+      "key": "SUP-3",
+      "changelog": {
+       "startAt": 0,
+       "maxResults": 1,
+       "total": 1,
+       "histories": [
+        {
+         "id": "40005",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=alice",
+          "name": "alice",
+          "key": "JIRAUSER10100",
+          "emailAddress": "alice@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Alice Example",
+          "active": true,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2024-04-02T10:00:00.000+0700",
+         "items": [
+          {
+           "field": "Attachment",
+           "fieldtype": "jira",
+           "from": null,
+           "fromString": null,
+           "to": "30500",
+           "toString": "quote.png"
+          },
+          {
+           "field": "Epic Link",
+           "fieldtype": "custom",
+           "from": null,
+           "fromString": null,
+           "to": null,
+           "toString": "SUP-1"
+          }
+         ]
+        }
+       ]
+      },
+      "fields": {
+       "issuetype": {
+        "self": "https://jira.example.com/rest/api/2/issuetype/3",
+        "id": "3",
+        "description": "A task that needs to be done.",
+        "iconUrl": "https://jira.example.com/images/icons/issuetypes/task.svg",
+        "name": "Task",
+        "subtask": false,
+        "avatarId": 10318
+       },
+       "project": {
+        "self": "https://jira.example.com/rest/api/2/project/10200",
+        "id": "10200",
+        "key": "SUP",
+        "name": "Customer Support",
+        "projectTypeKey": "software",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/projectavatar?avatarId=10324"
+        }
+       },
+       "fixVersions": [],
+       "resolution": null,
+       "resolutiondate": null,
+       "workratio": -1,
+       "lastViewed": null,
+       "watches": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/watchers",
+        "watchCount": 1,
+        "isWatching": false
+       },
+       "created": "2023-11-04T08:00:00.000+0700",
+       "priority": {
+        "self": "https://jira.example.com/rest/api/2/priority/3",
+        "statusColor": "#f79232",
+        "description": "Has the potential to affect progress.",
+        "iconUrl": "https://jira.example.com/images/icons/priorities/medium.svg",
+        "name": "Medium",
+        "id": "3"
+       },
+       "labels": [],
+       "versions": [],
+       "issuelinks": [],
+       "assignee": null,
+       "updated": "2023-11-04T08:00:00.000+0700",
+       "status": {
+        "self": "https://jira.example.com/rest/api/2/status/1",
+        "description": "",
+        "iconUrl": "https://jira.example.com/images/icons/statuses/open.png",
+        "name": "Open",
+        "id": "1",
+        "statusCategory": {
+         "self": "https://jira.example.com/rest/api/2/statuscategory/2",
+         "id": 2,
+         "key": "new",
+         "colorName": "default",
+         "name": "To Do"
+        }
+       },
+       "components": [],
+       "description": "Quote attached: !quote.png|thumbnail!\n\nThe list: [^paper list.txt]",
+       "timetracking": {},
+       "attachment": [
+        {
+         "self": "https://jira.example.com/rest/api/2/attachment/30500",
+         "id": "30500",
+         "filename": "quote.png",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=alice",
+          "name": "alice",
+          "key": "JIRAUSER10100",
+          "emailAddress": "alice@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Alice Example",
+          "active": true,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2024-04-02T10:00:00.000+0700",
+         "size": 69,
+         "mimeType": "image/png",
+         "content": "https://jira.example.com/secure/attachment/30500/quote.png"
+        },
+        {
+         "self": "https://jira.example.com/rest/api/2/attachment/30501",
+         "id": "30501",
+         "filename": "paper list.txt",
+         "author": {
+          "self": "https://jira.example.com/rest/api/2/user?username=alice",
+          "name": "alice",
+          "key": "JIRAUSER10100",
+          "emailAddress": "alice@example.com",
+          "avatarUrls": {
+           "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+          },
+          "displayName": "Alice Example",
+          "active": true,
+          "timeZone": "Asia/Bangkok"
+         },
+         "created": "2024-04-02T10:05:00.000+0700",
+         "size": 34,
+         "mimeType": "text/plain",
+         "content": "https://files.example.net/30501/paper%20list.txt"
+        }
+       ],
+       "summary": "Order paper",
+       "creator": {
+        "self": "https://jira.example.com/rest/api/2/user?username=bob",
+        "name": "bob",
+        "key": "bob",
+        "emailAddress": "bob@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Bob Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "subtasks": [],
+       "reporter": {
+        "self": "https://jira.example.com/rest/api/2/user?username=bob",
+        "name": "bob",
+        "key": "bob",
+        "emailAddress": "bob@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Bob Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       },
+       "aggregateprogress": {
+        "progress": 0,
+        "total": 0
+       },
+       "environment": null,
+       "duedate": null,
+       "progress": {
+        "progress": 0,
+        "total": 0
+       },
+       "votes": {
+        "self": "https://jira.example.com/rest/api/2/issue/x/votes",
+        "votes": 1,
+        "hasVoted": false
+       },
+       "worklog": {
+        "startAt": 0,
+        "maxResults": 20,
+        "total": 0,
+        "worklogs": []
+       },
+       "comment": {
+        "comments": [],
+        "maxResults": 0,
+        "total": 0,
+        "startAt": 0
+       },
+       "customfield_10100": "SUP-1"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/PLAT-3"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "expand": "",
+      "id": "20903",
+      "self": "https://jira.example.com/rest/api/2/issue/20903",
+      "key": "PLAT-3",
+      "fields": {}
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/secure/attachment/30500/quote.png"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGOQOyEHAAIMAQUtuDZBAAAAAElFTkSuQmCC"
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/attachment/content/30501"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "base64": "QTQgcGFwZXIsIDUgYm94ZXMKQTMgcGFwZXIsIDEgYm94Cg=="
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20001/watchers"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "self": "https://jira.example.com/rest/api/2/issue/20001/watchers",
+      "isWatching": false,
+      "watchCount": 1,
+      "watchers": [
+       {
+        "self": "https://jira.example.com/rest/api/2/user?username=alice",
+        "name": "alice",
+        "key": "JIRAUSER10100",
+        "emailAddress": "alice@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Alice Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20002/watchers"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "self": "https://jira.example.com/rest/api/2/issue/20002/watchers",
+      "isWatching": false,
+      "watchCount": 1,
+      "watchers": [
+       {
+        "self": "https://jira.example.com/rest/api/2/user?username=carol",
+        "name": "carol",
+        "key": "JIRAUSER10102",
+        "emailAddress": "carol@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Carol Example",
+        "active": false,
+        "timeZone": "Asia/Bangkok"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/api/2/issue/20003/watchers"
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "self": "https://jira.example.com/rest/api/2/issue/20003/watchers",
+      "isWatching": false,
+      "watchCount": 1,
+      "watchers": [
+       {
+        "self": "https://jira.example.com/rest/api/2/user?username=bob",
+        "name": "bob",
+        "key": "bob",
+        "emailAddress": "bob@example.com",
+        "avatarUrls": {
+         "48x48": "https://jira.example.com/secure/useravatar?avatarId=10122"
+        },
+        "displayName": "Bob Example",
+        "active": true,
+        "timeZone": "Asia/Bangkok"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board",
+    "params": {
+     "projectKeyOrId": "SUP"
+    }
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "maxResults": 50,
+      "startAt": 0,
+      "isLast": true,
+      "total": 1,
+      "values": [
+       {
+        "id": 10,
+        "self": "https://jira.example.com/rest/agile/1.0/board/10",
+        "name": "SUP board",
+        "type": "scrum",
+        "location": {
+         "projectId": 10200,
+         "displayName": "Customer Support (SUP)",
+         "projectName": "Customer Support",
+         "projectKey": "SUP",
+         "projectTypeKey": "software",
+         "name": "Customer Support (SUP)"
+        }
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "request": {
+    "method": "GET",
+    "path": "/rest/agile/1.0/board/10/sprint",
+    "params": {
+     "startAt": 0
+    }
+   },
+   "responses": [
+    {
+     "status": 200,
+     "json": {
+      "maxResults": 50,
+      "startAt": 0,
+      "isLast": true,
+      "values": [
+       {
+        "id": 11,
+        "self": "https://jira.example.com/rest/agile/1.0/sprint/11",
+        "state": "closed",
+        "name": "SUP Sprint 1, the first",
+        "startDate": "2024-01-29T10:00:00.000+07:00",
+        "endDate": "2024-02-12T10:00:00.000+07:00",
+        "completeDate": "2024-02-12T11:00:00.000+07:00",
+        "originBoardId": 10,
+        "goal": "Triage the backlog"
+       },
+       {
+        "id": 12,
+        "self": "https://jira.example.com/rest/agile/1.0/sprint/12",
+        "state": "active",
+        "name": "SUP Sprint 2",
+        "startDate": "2024-02-12T10:00:00.000+07:00",
+        "endDate": "2024-02-26T10:00:00.000+07:00",
+        "originBoardId": 10
+       }
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}

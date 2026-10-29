@@ -1,0 +1,10 @@
+Specivo Jira migration tool
+Copyright 2026 Specivo
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+It converts Jira wiki markup with jira2markdown (https://github.com/catcombo/jira2markdown),
+licensed under the MIT License.
+
+Jira is a trademark of Atlassian. This tool is not affiliated with or endorsed
+by Atlassian; the name is used only to say which system the tool reads.

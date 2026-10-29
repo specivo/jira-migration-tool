@@ -1,0 +1,83 @@
+[project]
+name = "specivo-jira-migration"
+version = "0.1.0"
+description = "Export Jira Cloud or Jira Data Center projects to a Specivo import bundle"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.12"
+authors = [{ name = "Specivo" }]
+keywords = ["specivo", "jira", "migration", "jira-migration", "issue-tracker"]
+dependencies = [
+    "specivo-migration-sdk @ git+https://github.com/specivo/migration-sdk@v0.2.0",
+    "httpx>=0.28,<1",
+    "jira2markdown>=0.5,<0.6",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Bug Tracking",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://specivo.io"
+Documentation = "https://specivo.io/docs/jira-migration-tool/"
+Repository = "https://github.com/specivo/jira-migration-tool"
+Issues = "https://github.com/specivo/jira-migration-tool/issues"
+
+[project.scripts]
+specivo-jira-migration = "specivo_jira_migration.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+# The SDK dependency is a direct git reference.
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/specivo_jira_migration"]
+
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "respx>=0.22",
+    "ruff>=0.8",
+    "packaging>=24",
+    "pyyaml>=6.0",
+    "types-pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short --strict-markers"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["jira2markdown", "jira2markdown.*", "pyparsing", "pyparsing.*"]
+ignore_missing_imports = true
